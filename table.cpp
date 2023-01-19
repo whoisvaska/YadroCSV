@@ -208,7 +208,7 @@ int Table::calculateExpression(const std::string& expression, int result) {
         }
         else
         {
-
+            value1 = 0;
         }
     }
     else
@@ -252,7 +252,7 @@ int Table::calculateExpression(const std::string& expression, int result) {
         }
         else
         {
-
+            value2 = 0;
         }
     }
     else
