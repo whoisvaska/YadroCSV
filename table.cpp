@@ -70,19 +70,21 @@ Table::Table(const std::string& fname)
 
 int Table::print()
 {
-    //header
-    for (const auto& v : this->data)
+    //print headers
+    for (const auto& col : this->data)
     {
-        std::cout << "," << v.first;
+        std::cout << "," << col.first;
     }
     std::cout << std::endl;
+    //
+
 
     for (int row = 0; row < this->rowsCount; row++)
     {
         std::cout << row + 1;
-        for (const auto& v : this->data)
+        for (const auto& col : this->data)
         {
-            std::cout << ',' << v.second[row];
+            std::cout << ',' << col.second[row];
         }
         std::cout << std::endl;
     }
@@ -179,7 +181,7 @@ int Table::splitExpression(std::string expression, std::string& col1, std::strin
         charNumber += 1;
     }
 
-    std::cout << col1 << ',' << row1 << ',' << col2 << ',' << row2  << ',' << op << std::endl;
+    // std::cout << col1 << ',' << row1 << ',' << col2 << ',' << row2  << ',' << op << std::endl;
     return 0;
 }
 
@@ -314,10 +316,10 @@ int Table::calculate()
 {
     for (int rowNumber = 0; rowNumber < this->rowsCount; rowNumber++)
     {
-        for (const auto& v : this->data)
+        for (const auto& col : this->data)
         {
             int charNumber = 0;
-            std::string expression = getValue(v.first, std::to_string(rowNumber + 1));
+            std::string expression = getValue(col.first, std::to_string(rowNumber + 1));
             if (expression[0] == '=')
             {
                 int value = 0;
@@ -333,7 +335,7 @@ int Table::calculate()
                 }
                 try
                 {
-                    setValue(v.first, std::to_string(rowNumber + 1), std::to_string(value));
+                    setValue(col.first, std::to_string(rowNumber + 1), std::to_string(value));
                 }
                 catch (std::invalid_argument e)
                 {

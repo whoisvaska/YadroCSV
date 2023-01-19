@@ -23,9 +23,9 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
-    table.print();
+    // table.print();
 
-    std::cout << std::endl;
+    // std::cout << std::endl;
 
     table.calculate();
 
