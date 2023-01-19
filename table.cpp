@@ -22,6 +22,7 @@ Table::Table(const std::string& fname)
     values = splitString(line, ',');
     for (const auto& col : values)
     {
+        //first col should be ""
         if (col.length() > 0)
         {
             columns.push_back(col);
@@ -32,7 +33,10 @@ Table::Table(const std::string& fname)
 
     values.clear();
 
+
+    //check for wrong order
     int row = 1;
+
     while (std::getline(fin, line))
     {
         int column = 1;
@@ -190,6 +194,7 @@ int Table::calculateExpression(const std::string& expression, int result) {
     int value1, value2 = 0;
     std::string col1, col2, row1, row2, op;
 
+
     splitExpression(expression, col1, row1, col2, row2, op);
 
     if (col1.empty())
@@ -261,6 +266,8 @@ int Table::calculateExpression(const std::string& expression, int result) {
         {
             throw std::invalid_argument("Cannot calculate cell: " + col2 + row2);
         }
+
+        // to prevent infinite recursion we store unresolved cell or value (for example when A1 contains =A1) 
         unresolvedExpressions.push_back(col2 + row2);
 
         if (getValue(col2, row2)[0] == '=' )
