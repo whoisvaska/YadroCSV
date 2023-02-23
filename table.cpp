@@ -149,6 +149,16 @@ int Table::splitExpression(std::string expression, std::string& col1, std::strin
         charNumber += 1;
     }
 
+    /*for negative numbers
+     * ,=-21-A2
+     *
+    */
+    if (expression[charNumber] == '-')
+    {
+        row1.push_back(expression[charNumber]);
+        charNumber += 1;
+    }
+
     while(isalpha(expression[charNumber]) && (charNumber <= expression.length()))
     {
         col1.push_back(expression[charNumber]);
@@ -185,7 +195,7 @@ int Table::splitExpression(std::string expression, std::string& col1, std::strin
         charNumber += 1;
     }
 
-    // std::cout << col1 << ',' << row1 << ',' << col2 << ',' << row2  << ',' << op << std::endl;
+//    std::cout << col1 << ',' << row1 << ',' << col2 << ',' << row2  << ',' << op << std::endl;
     return 0;
 }
 
